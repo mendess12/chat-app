@@ -10,7 +10,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpFragment"
+    tools:context=".ui.SignUpFragment"
     android:background="@color/purple_700">
 
     <TextView
@@ -126,12 +126,12 @@
         android:textColor="@color/gray"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/signUpScreenSignUpTextView"
+        app:layout_constraintEnd_toStartOf="@+id/signUpScreenSignInTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUpScreenSignUpButton" />
 
     <TextView
-        android:id="@+id/signUpScreenSignUpTextView"
+        android:id="@+id/signUpScreenSignInTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
