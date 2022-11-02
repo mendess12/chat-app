@@ -1,4 +1,4 @@
-package com.example.socialmedia.ui
+package com.example.socialmedia.ui.user
 
 import android.os.Bundle
 import android.util.Patterns
@@ -49,6 +49,8 @@ class LoginFragment : Fragment() {
 
                     //TODO main screen yapıldığında geçiş yapılacak
                     Toast.makeText(activity, "Sucess", Toast.LENGTH_LONG).show()
+                    val action = LoginFragmentDirections.actionLoginFragmentToMainActivity2()
+                    findNavController().navigate(action)
                 }.addOnFailureListener {
                     Toast.makeText(activity, it.localizedMessage, Toast.LENGTH_LONG).show()
                 }

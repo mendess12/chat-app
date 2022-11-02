@@ -1,7 +1,8 @@
-package com.example.socialmedia
+package com.example.socialmedia.ui.user
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.socialmedia.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
