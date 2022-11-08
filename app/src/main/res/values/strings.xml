@@ -13,4 +13,6 @@
     <string name="already">Already have an account?</string>
     <string name="go_to_login">Sign in now</string>
     <string name="reset_password">Reset Password</string>
+    <string name="comment">Comment</string>
+    <string name="add_post">Add Post</string>
 </resources>

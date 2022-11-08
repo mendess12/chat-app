@@ -38,6 +38,12 @@ class LoginFragment : Fragment() {
         // Initialize Firebase Auth
         auth = Firebase.auth
 
+      /*  val currentUser = auth.currentUser
+        if (currentUser != null){
+            val action = LoginFragmentDirections.actionLoginFragmentToMainActivity2()
+            findNavController().navigate(action)
+        }
+*/
         binding.loginScreenLoginButton.setOnClickListener {
 
             val email = binding.loginScreenEmailEditText.text.toString().trim()

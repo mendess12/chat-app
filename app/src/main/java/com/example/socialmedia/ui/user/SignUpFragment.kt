@@ -57,9 +57,6 @@ class SignUpFragment : Fragment() {
 
             } else {
 
-                binding.signUpScreenNameEditText.error = "This field cannot be empty"
-                binding.signUpScreenNameEditText.requestFocus()
-                return@setOnClickListener
 
                 binding.signUpScreenEmailEditText.error = "Email Required"
                 binding.signUpScreenEmailEditText.requestFocus()
