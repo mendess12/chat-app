@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.socialmedia.databinding.PhotoRecyclerRowBinding
 import com.example.socialmedia.model.Post
+import com.squareup.picasso.Picasso
 
 class PostRecyclerAdapter (private val postList : ArrayList<Post>) : RecyclerView.Adapter<PostRecyclerAdapter.PostHolder>() {
 
@@ -20,6 +21,7 @@ class PostRecyclerAdapter (private val postList : ArrayList<Post>) : RecyclerVie
 
         holder.binding.recyclerEmailTextView.text = postList.get(position).email
         holder.binding.recyclerCommentTextView.text = postList.get(position).comment
+        Picasso.get().load(postList.get(position).downloadUrl).into(holder.binding.recyclerImageView)
     }
 
     override fun getItemCount(): Int {
