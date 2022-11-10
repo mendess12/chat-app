@@ -19,6 +19,15 @@ import androidx.core.content.ContextCompat
 import com.example.socialmedia.R
 import com.example.socialmedia.databinding.FragmentAddPostBinding
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
+import java.util.UUID
 
 class AddPostFragment : Fragment() {
 
@@ -26,6 +35,9 @@ class AddPostFragment : Fragment() {
     private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var permissionLauncher: ActivityResultLauncher<String>
     var selectedPicture: Uri? = null
+    private lateinit var auth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
+    private lateinit var storage: FirebaseStorage
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +58,10 @@ class AddPostFragment : Fragment() {
 
         registerLauncher()
 
+        auth = Firebase.auth
+        firestore = Firebase.firestore
+        storage = Firebase.storage
+
         binding.addPostImageView.setOnClickListener {
 
             //izin işlemleri
@@ -59,9 +75,8 @@ class AddPostFragment : Fragment() {
                         Manifest.permission.READ_EXTERNAL_STORAGE
                     )
                 ) {
-                    Snackbar.make(view, "Permission neede for gallery", Snackbar.LENGTH_INDEFINITE)
+                    Snackbar.make(requireView(), "Permission needed for gallery", Snackbar.LENGTH_INDEFINITE)
                         .setAction("Give Permission") {
-
                             //request permission
                             permissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
                         }.show()
@@ -70,11 +85,48 @@ class AddPostFragment : Fragment() {
                     permissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
                 }
             } else {
-
                 //go to gallery
                 val intentToGallery =
                     Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                 activityResultLauncher.launch(intentToGallery)
+            }
+        }
+
+        binding.addPostButton.setOnClickListener {
+
+            //universal unique id
+            val uuid = UUID.randomUUID()
+            val imageName = "$uuid.jpg"
+
+            val reference = storage.reference
+            val imageReference = reference.child("images").child(imageName)
+
+            if (selectedPicture != null) {
+                imageReference.putFile(selectedPicture!!).addOnSuccessListener {
+                    //dowmload url -> firestore
+                    val uploadPictureReference = storage.reference.child("images").child(imageName)
+                    uploadPictureReference.downloadUrl.addOnSuccessListener{
+                        val downloadUrl = it.toString()
+                        if (auth.currentUser != null){
+                            val postMap = hashMapOf<String,Any>()
+                            postMap.put("downloadUrl",downloadUrl)
+                            postMap.put("userEmail",auth.currentUser!!.email!!)
+                            postMap.put("comment",binding.commentEditText.text.toString())
+                            postMap.put("date",Timestamp.now())
+
+                            firestore.collection("Posts").add(postMap).addOnSuccessListener {
+
+                                //todo
+                            }.addOnFailureListener {
+                                Toast.makeText(requireContext(),it.localizedMessage,Toast.LENGTH_LONG).show()
+                            }
+                        }
+                    }
+
+                }.addOnFailureListener {
+                    Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_LONG).show()
+                }
+
             }
         }
     }
@@ -82,7 +134,6 @@ class AddPostFragment : Fragment() {
     private fun registerLauncher() {
         activityResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-
                 if (result.resultCode == RESULT_OK) {
                     val intentFromResult = result.data
                     if (intentFromResult != null) {
