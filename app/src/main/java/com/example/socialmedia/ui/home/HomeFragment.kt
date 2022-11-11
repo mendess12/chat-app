@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 
 class HomeFragment : Fragment() {
 
@@ -25,7 +26,7 @@ class HomeFragment : Fragment() {
     private lateinit var firestore: FirebaseFirestore
     private lateinit var postArrayList: ArrayList<Post>
     private lateinit var postRecyclerAdapter: PostRecyclerAdapter
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -41,8 +42,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
-        auth = Firebase.auth
-        firestore = Firebase.firestore
+        auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
 
         postArrayList = ArrayList<Post>()
 

@@ -12,12 +12,14 @@ import com.example.socialmedia.R
 import com.example.socialmedia.databinding.FragmentSignUpBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 class SignUpFragment : Fragment() {
 
     private lateinit var binding: FragmentSignUpBinding
     private lateinit var auth: FirebaseAuth
+    private lateinit var firestore : FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +37,8 @@ class SignUpFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSignUpBinding.bind(view)
         // Initialize Firebase Auth
-        auth = Firebase.auth
+        auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
 
         binding.signUpScreenSignUpButton.setOnClickListener {
 
@@ -50,12 +53,22 @@ class SignUpFragment : Fragment() {
                     Toast.makeText(activity, "Sucess", Toast.LENGTH_LONG).show()
                     val action = SignUpFragmentDirections.actionSignUpFragmentToLoginFragment()
                     findNavController().navigate(action)
-                }
-                    .addOnFailureListener {
-                        Toast.makeText(activity, it.localizedMessage, Toast.LENGTH_LONG).show()
+
+                    val uid = FirebaseAuth.getInstance().currentUser!!.uid
+
+
+                    val postMap = hashMapOf<String, Any>()
+                    postMap.put("userName", binding.signUpScreenNameEditText.text.toString())
+                    postMap.put("userEmail", binding.signUpScreenEmailEditText.text.toString())
+
+                    firestore.collection("users").document("${uid}").set(postMap).addOnSuccessListener {
+
+                    }.addOnFailureListener {
+                        Toast.makeText(requireContext(),it.localizedMessage,Toast.LENGTH_LONG).show()
                     }
 
-            } else {
+                }
+         } else {
 
 
                 binding.signUpScreenEmailEditText.error = "Email Required"

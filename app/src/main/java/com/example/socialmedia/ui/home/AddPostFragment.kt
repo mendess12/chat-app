@@ -58,9 +58,9 @@ class AddPostFragment : Fragment() {
 
         registerLauncher()
 
-        auth = Firebase.auth
-        firestore = Firebase.firestore
-        storage = Firebase.storage
+        auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
+        storage = FirebaseStorage.getInstance()
 
         binding.addPostImageView.setOnClickListener {
 
@@ -107,12 +107,12 @@ class AddPostFragment : Fragment() {
                     val uploadPictureReference = storage.reference.child("images").child(imageName)
                     uploadPictureReference.downloadUrl.addOnSuccessListener{
                         val downloadUrl = it.toString()
-                        if (auth.currentUser != null){
-                            val postMap = hashMapOf<String,Any>()
-                            postMap.put("downloadUrl",downloadUrl)
-                            postMap.put("userEmail",auth.currentUser!!.email!!)
-                            postMap.put("comment",binding.commentEditText.text.toString())
-                            postMap.put("date",Timestamp.now())
+                        if (auth.currentUser != null) {
+                            val postMap = hashMapOf<String, Any>()
+                            postMap.put("downloadUrl", downloadUrl)
+                            postMap.put("userEmail", auth.currentUser!!.email!!)
+                            postMap.put("comment", binding.commentEditText.text.toString())
+                            postMap.put("date", Timestamp.now())
 
                             firestore.collection("Posts").add(postMap).addOnSuccessListener {
 

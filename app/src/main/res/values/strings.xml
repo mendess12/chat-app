@@ -15,4 +15,6 @@
     <string name="reset_password">Reset Password</string>
     <string name="comment">Comment</string>
     <string name="add_post">Add Post</string>
+    <string name="change_password">Change Password</string>
+    <string name="sign_out">Sign Out</string>
 </resources>
