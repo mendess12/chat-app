@@ -11,9 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.socialmedia.R
 import com.example.socialmedia.databinding.FragmentSignUpBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 
 class SignUpFragment : Fragment() {
 
@@ -61,7 +59,7 @@ class SignUpFragment : Fragment() {
                     postMap.put("userName", binding.signUpScreenNameEditText.text.toString())
                     postMap.put("userEmail", binding.signUpScreenEmailEditText.text.toString())
 
-                    firestore.collection("users").document("${uid}").set(postMap).addOnSuccessListener {
+                    firestore.collection("Users").document("${uid}").set(postMap).addOnSuccessListener {
 
                     }.addOnFailureListener {
                         Toast.makeText(requireContext(),it.localizedMessage,Toast.LENGTH_LONG).show()
