@@ -37,20 +37,20 @@ class ForgotPasswordFragment : Fragment() {
         binding.forgotPasswordScreenResetPasswordButton.setOnClickListener {
             val email = binding.forgotPasswordScreenEmailEditText.text.toString()
 
-            if (email.isNotEmpty()){
+            if (email.isNotEmpty()) {
                 auth.sendPasswordResetEmail(email).addOnSuccessListener {
-                    Toast.makeText(activity,"success",Toast.LENGTH_LONG).show()
-                    val action = ForgotPasswordFragmentDirections.actionForgotPasswordFragmentToLoginFragment()
+                    Toast.makeText(activity, "success", Toast.LENGTH_LONG).show()
+                    val action =
+                        ForgotPasswordFragmentDirections.actionForgotPasswordFragmentToLoginFragment()
                     findNavController().navigate(action)
                 }.addOnFailureListener {
-                    Toast.makeText(activity,it.localizedMessage,Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, it.localizedMessage, Toast.LENGTH_LONG).show()
                     println(it.localizedMessage)
                 }
-            }else{
+            } else {
                 binding.forgotPasswordScreenEmailEditText.error = "Email Required"
                 binding.forgotPasswordScreenEmailEditText.requestFocus()
                 return@setOnClickListener
-
             }
         }
     }

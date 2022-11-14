@@ -17,7 +17,7 @@ class SignUpFragment : Fragment() {
 
     private lateinit var binding: FragmentSignUpBinding
     private lateinit var auth: FirebaseAuth
-    private lateinit var firestore : FirebaseFirestore
+    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +44,6 @@ class SignUpFragment : Fragment() {
             val email = binding.signUpScreenEmailEditText.text.toString().trim()
             val password = binding.signUpScreenPasswordEditText.text.toString().trim()
 
-
             if (userName.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
 
                 auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener {
@@ -54,27 +53,27 @@ class SignUpFragment : Fragment() {
 
                     val uid = FirebaseAuth.getInstance().currentUser!!.uid
 
-
                     val postMap = hashMapOf<String, Any>()
                     postMap.put("userName", binding.signUpScreenNameEditText.text.toString())
                     postMap.put("userEmail", binding.signUpScreenEmailEditText.text.toString())
 
-                    firestore.collection("Users").document("${uid}").set(postMap).addOnSuccessListener {
+                    firestore.collection("Users").document("${uid}").set(postMap)
+                        .addOnSuccessListener {
 
-                    }.addOnFailureListener {
-                        Toast.makeText(requireContext(),it.localizedMessage,Toast.LENGTH_LONG).show()
-                    }
-
+                        }.addOnFailureListener {
+                            Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_LONG)
+                                .show()
+                        }
                 }
-         } else {
+            } else {
 
-
-                binding.signUpScreenEmailEditText.error = "Email Required"
-                binding.signUpScreenEmailEditText.requestFocus()
-                return@setOnClickListener
-
-                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    binding.signUpScreenEmailEditText.error = "use @ "
+                if (userName.isEmpty()) {
+                    binding.signUpScreenNameEditText.error = "This area can not be empty"
+                    binding.signUpScreenNameEditText.requestFocus()
+                    return@setOnClickListener
+                }
+                if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    binding.signUpScreenEmailEditText.error = "Check your password "
                     binding.signUpScreenEmailEditText.requestFocus()
                     return@setOnClickListener
                 }
@@ -84,7 +83,6 @@ class SignUpFragment : Fragment() {
                     return@setOnClickListener
                 }
             }
-
         }
 
         binding.signUpScreenSignInTextView.setOnClickListener {

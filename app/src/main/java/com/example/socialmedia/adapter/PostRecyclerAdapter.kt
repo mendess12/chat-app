@@ -7,13 +7,14 @@ import com.example.socialmedia.databinding.PhotoRecyclerRowBinding
 import com.example.socialmedia.model.Post
 import com.squareup.picasso.Picasso
 
-class PostRecyclerAdapter (private val postList : ArrayList<Post>) : RecyclerView.Adapter<PostRecyclerAdapter.PostHolder>() {
+class PostRecyclerAdapter(private val postList: ArrayList<Post>) :
+    RecyclerView.Adapter<PostRecyclerAdapter.PostHolder>() {
 
-
-    class PostHolder(val binding : PhotoRecyclerRowBinding): RecyclerView.ViewHolder(binding.root)
+    class PostHolder(val binding: PhotoRecyclerRowBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostHolder {
-        val binding = PhotoRecyclerRowBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding =
+            PhotoRecyclerRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PostHolder(binding)
     }
 
@@ -21,7 +22,8 @@ class PostRecyclerAdapter (private val postList : ArrayList<Post>) : RecyclerVie
 
         holder.binding.recyclerEmailTextView.text = postList.get(position).email
         holder.binding.recyclerCommentTextView.text = postList.get(position).comment
-        Picasso.get().load(postList.get(position).downloadUrl).into(holder.binding.recyclerImageView)
+        Picasso.get().load(postList.get(position).downloadUrl)
+            .into(holder.binding.recyclerImageView)
     }
 
     override fun getItemCount(): Int {

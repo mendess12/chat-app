@@ -12,12 +12,8 @@ import com.example.socialmedia.adapter.PostRecyclerAdapter
 import com.example.socialmedia.databinding.FragmentHomeBinding
 import com.example.socialmedia.model.Post
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
 
 class HomeFragment : Fragment() {
 
@@ -52,7 +48,6 @@ class HomeFragment : Fragment() {
         binding.postRecyclerView.layoutManager = LinearLayoutManager(activity)
         postRecyclerAdapter = PostRecyclerAdapter(postArrayList)
         binding.postRecyclerView.adapter = postRecyclerAdapter
-
     }
 
     private fun getData() {
@@ -77,11 +72,9 @@ class HomeFragment : Fragment() {
                                 postArrayList.add(post)
                             }
                             postRecyclerAdapter.notifyDataSetChanged()
-
                         }
                     }
                 }
             }
     }
-
 }

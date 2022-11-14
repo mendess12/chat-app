@@ -14,7 +14,7 @@
         android:padding="8dp"
         android:text="@string/email"
         android:textStyle="bold"
-        android:textColor="@color/button_background_color"
+        android:textColor="@color/black"
         android:textSize="20sp"/>
     
     <ImageView
@@ -33,7 +33,7 @@
         android:textStyle="normal"
         android:padding="8dp"
         android:layout_margin="5dp"
-        android:textColor="@color/button_background_color"/>
+        android:textColor="@color/black"/>
 
 
 

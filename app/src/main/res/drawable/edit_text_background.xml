@@ -9,11 +9,11 @@
     </corners>
 
     <solid
-        android:color="@color/white">
+        android:color="@color/primary">
     </solid>
     <stroke
 
-        android:color="#e2e6ea"
+        android:color="@color/dark"
         android:width="2dp">
 
 

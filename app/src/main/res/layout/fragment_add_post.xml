@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary"
     tools:context=".ui.home.AddPostFragment">
 
 
@@ -39,7 +40,7 @@
         android:id="@+id/addPostButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/button_background_color"
+        android:backgroundTint="@color/dark"
         android:textColor="@color/button_text_color"
         android:text="@string/add_post"
         android:textSize="24sp"

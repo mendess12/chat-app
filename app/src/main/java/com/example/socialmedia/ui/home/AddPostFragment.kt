@@ -21,12 +21,8 @@ import com.example.socialmedia.databinding.FragmentAddPostBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.storage
 import java.util.UUID
 
 class AddPostFragment : Fragment() {
@@ -75,7 +71,11 @@ class AddPostFragment : Fragment() {
                         Manifest.permission.READ_EXTERNAL_STORAGE
                     )
                 ) {
-                    Snackbar.make(requireView(), "Permission needed for gallery", Snackbar.LENGTH_INDEFINITE)
+                    Snackbar.make(
+                        requireView(),
+                        "Permission needed for gallery",
+                        Snackbar.LENGTH_INDEFINITE
+                    )
                         .setAction("Give Permission") {
                             //request permission
                             permissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -105,7 +105,7 @@ class AddPostFragment : Fragment() {
                 imageReference.putFile(selectedPicture!!).addOnSuccessListener {
                     //dowmload url -> firestore
                     val uploadPictureReference = storage.reference.child("images").child(imageName)
-                    uploadPictureReference.downloadUrl.addOnSuccessListener{
+                    uploadPictureReference.downloadUrl.addOnSuccessListener {
                         val downloadUrl = it.toString()
                         if (auth.currentUser != null) {
                             val postMap = hashMapOf<String, Any>()
@@ -118,15 +118,17 @@ class AddPostFragment : Fragment() {
 
                                 //todo
                             }.addOnFailureListener {
-                                Toast.makeText(requireContext(),it.localizedMessage,Toast.LENGTH_LONG).show()
+                                Toast.makeText(
+                                    requireContext(),
+                                    it.localizedMessage,
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
                         }
                     }
-
                 }.addOnFailureListener {
                     Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_LONG).show()
                 }
-
             }
         }
     }

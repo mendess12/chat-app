@@ -9,15 +9,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.socialmedia.R
 import com.example.socialmedia.databinding.FragmentProfileBinding
+import com.example.socialmedia.ui.user.MainActivity
+import com.example.socialmedia.util.BaseCurrent
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-
 
 class ProfileFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: FragmentProfileBinding
     private lateinit var firestore: FirebaseFirestore
+    var baseCurrent = BaseCurrent()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +43,9 @@ class ProfileFragment : Fragment() {
         getUserData()
 
         binding.profileScreenSignOutTextView.setOnClickListener {
-
             auth.signOut()
-            val intent = Intent(requireContext(), MainActivity2::class.java)
+            baseCurrent.currentUser = null
+            val intent = Intent(requireContext(), MainActivity::class.java)
             startActivity(intent)
         }
     }
@@ -55,17 +57,14 @@ class ProfileFragment : Fragment() {
             if (document != null){
                 val userName = document.get("userName") as String
                 val userEmail = document.get("userEmail") as String
-
                 binding.profileScreenUserNameTextView.text = userName
                 binding.profileScreenEmailTextView.text = userEmail
 
             }else{
                 Toast.makeText(requireContext(),"Document is null",Toast.LENGTH_LONG).show()
             }
-
         }.addOnFailureListener {
             Toast.makeText(requireContext(),it.localizedMessage,Toast.LENGTH_LONG).show()
         }
-
     }
 }

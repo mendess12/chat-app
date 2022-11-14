@@ -8,7 +8,7 @@ import com.example.socialmedia.databinding.ActivityMain2Binding
 
 class MainActivity2 : AppCompatActivity() {
 
-    private lateinit var binding : ActivityMain2Binding
+    private lateinit var binding: ActivityMain2Binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,25 +17,22 @@ class MainActivity2 : AppCompatActivity() {
         replaceFragment(HomeFragment())
 
         binding.bottomNavigationView.setOnItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.home -> replaceFragment(HomeFragment())
                 R.id.addPost -> replaceFragment(AddPostFragment())
                 R.id.messagee -> replaceFragment(MessageFragment())
                 R.id.profile -> replaceFragment(ProfileFragment())
-
-                else ->{
-
+                else -> {
                 }
             }
             true
         }
-
     }
 
-    private fun replaceFragment(fragment : Fragment){
+    private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frameLayout,fragment)
+        fragmentTransaction.replace(R.id.frameLayout, fragment)
         fragmentTransaction.commit()
     }
 }

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.socialmedia.R
 
-
 class MessageFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,5 +19,4 @@ class MessageFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_message, container, false)
     }
-
 }

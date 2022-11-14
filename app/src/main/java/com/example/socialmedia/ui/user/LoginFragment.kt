@@ -10,14 +10,14 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.socialmedia.R
 import com.example.socialmedia.databinding.FragmentLoginBinding
+import com.example.socialmedia.util.BaseCurrent
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private lateinit var auth: FirebaseAuth
+    var baseCurrent = BaseCurrent()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,15 +31,14 @@ class LoginFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLoginBinding.bind(view)
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
 
-        val currentUser = auth.currentUser
-        if (currentUser != null){
+        baseCurrent.currentUser = auth.currentUser
+        if (baseCurrent.currentUser != null) {
             val action = LoginFragmentDirections.actionLoginFragmentToMainActivity2()
             findNavController().navigate(action)
         }
@@ -52,8 +51,6 @@ class LoginFragment : Fragment() {
             if (email.isNotEmpty() && password.isNotEmpty()) {
 
                 auth.signInWithEmailAndPassword(email, password).addOnSuccessListener {
-
-                    //TODO main screen yapıldığında geçiş yapılacak
                     Toast.makeText(activity, "Sucess", Toast.LENGTH_LONG).show()
                     val action = LoginFragmentDirections.actionLoginFragmentToMainActivity2()
                     findNavController().navigate(action)
@@ -61,12 +58,9 @@ class LoginFragment : Fragment() {
                     Toast.makeText(activity, it.localizedMessage, Toast.LENGTH_LONG).show()
                 }
             } else {
-                binding.loginScreenEmailEditText.error = "Email Required"
-                binding.loginScreenEmailEditText.requestFocus()
-                return@setOnClickListener
 
-                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    binding.loginScreenEmailEditText.error = "use @ "
+                if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    binding.loginScreenEmailEditText.error = "Check your email"
                     binding.loginScreenEmailEditText.requestFocus()
                     return@setOnClickListener
                 }
@@ -76,7 +70,6 @@ class LoginFragment : Fragment() {
                     return@setOnClickListener
                 }
             }
-
         }
 
         binding.loginScreenSignUpTextView.setOnClickListener {
@@ -88,8 +81,5 @@ class LoginFragment : Fragment() {
             val action = LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment()
             findNavController().navigate(action)
         }
-
-
     }
-
 }
