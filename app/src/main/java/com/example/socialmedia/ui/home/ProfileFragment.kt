@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.example.socialmedia.R
 import com.example.socialmedia.databinding.FragmentProfileBinding
 import com.example.socialmedia.ui.user.MainActivity
@@ -44,9 +45,17 @@ class ProfileFragment : Fragment() {
 
         binding.profileScreenSignOutTextView.setOnClickListener {
             auth.signOut()
-            baseCurrent.currentUser = null
+            //baseCurrent.currentUser = null
+            println("${baseCurrent.currentUser}")
             val intent = Intent(requireContext(), MainActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.profileScreenChangePasswordTextView.setOnClickListener {
+
+            val action = ProfileFragmentDirections.actionProfileFragmentToChangePasswordFragment()
+            findNavController().navigate(action)
+
         }
     }
 
@@ -54,17 +63,17 @@ class ProfileFragment : Fragment() {
         val uid = FirebaseAuth.getInstance().currentUser!!.uid
         firestore.collection("Users").document("${uid}").get().addOnSuccessListener { document ->
 
-            if (document != null){
+            if (document != null) {
                 val userName = document.get("userName") as String
                 val userEmail = document.get("userEmail") as String
                 binding.profileScreenUserNameTextView.text = userName
                 binding.profileScreenEmailTextView.text = userEmail
 
-            }else{
-                Toast.makeText(requireContext(),"Document is null",Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(requireContext(), "Document is null", Toast.LENGTH_LONG).show()
             }
         }.addOnFailureListener {
-            Toast.makeText(requireContext(),it.localizedMessage,Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_LONG).show()
         }
     }
 }

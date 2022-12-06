@@ -117,6 +117,8 @@ class AddPostFragment : Fragment() {
                             firestore.collection("Posts").add(postMap).addOnSuccessListener {
 
                                 //todo
+                                // val action = AddPostFragmentDirections.actionAddPostFragmentToHomeFragment()
+                                //findNavController().navigate(action)
                             }.addOnFailureListener {
                                 Toast.makeText(
                                     requireContext(),

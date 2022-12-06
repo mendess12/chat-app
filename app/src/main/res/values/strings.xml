@@ -17,4 +17,7 @@
     <string name="add_post">Add Post</string>
     <string name="change_password">Change Password</string>
     <string name="sign_out">Sign Out</string>
+    <string name="new_password">New Password</string>
+    <string name="retype_new_password">Retype New Password</string>
+    <string name="save">Save</string>
 </resources>
