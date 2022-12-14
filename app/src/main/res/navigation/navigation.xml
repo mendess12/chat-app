@@ -51,6 +51,9 @@
         <action
             android:id="@+id/action_homeFragment_to_mainActivity2"
             app:destination="@id/mainActivity2" />
+        <action
+            android:id="@+id/action_homeFragment_self"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/addPostFragment"

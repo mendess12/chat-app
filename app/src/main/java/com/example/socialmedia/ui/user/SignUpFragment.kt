@@ -56,6 +56,7 @@ class SignUpFragment : Fragment() {
                     val postMap = hashMapOf<String, Any>()
                     postMap.put("userName", binding.signUpScreenNameEditText.text.toString())
                     postMap.put("userEmail", binding.signUpScreenEmailEditText.text.toString())
+                    postMap.put("uid",uid)
 
                     firestore.collection("Users").document("${uid}").set(postMap)
                         .addOnSuccessListener {

@@ -30,9 +30,10 @@ class MainActivity2 : AppCompatActivity() {
     }
 
     private fun replaceFragment(fragment: Fragment) {
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frameLayout, fragment)
-        fragmentTransaction.commit()
+        if (fragment != null){
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.frameLayout,fragment)
+            transaction.commit()
+        }
     }
 }

@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
         firestore.collection("Posts").orderBy("date", Query.Direction.DESCENDING)
             .addSnapshotListener { value, error ->
                 if (error != null) {
-                    Toast.makeText(requireContext(), error.localizedMessage, Toast.LENGTH_LONG)
+                    Toast.makeText(context, error.localizedMessage, Toast.LENGTH_LONG)
                         .show()
                 } else {
                     if (value != null) {

@@ -20,4 +20,5 @@
     <string name="new_password">New Password</string>
     <string name="retype_new_password">Retype New Password</string>
     <string name="save">Save</string>
+    <string name="message_box">Type a message</string>
 </resources>
