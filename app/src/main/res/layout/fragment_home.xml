@@ -9,13 +9,36 @@
     tools:context=".ui.home.HomeFragment">
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/postRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/photo_recycler_row"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <include
+        android:id="@+id/homeToolbar"
+        layout="@layout/home_toolbar"
+        app:layout_constraintBottom_toTopOf="@+id/addPostImageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/postRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="670dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeToolbar"
+        tools:listitem="@layout/photo_recycler_row" />
+
+    <ImageView
+        android:id="@+id/addPostImageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="270dp"
+        android:layout_marginTop="500dp"
+        android:src="@drawable/add_post_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/postRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/postRecyclerView"
+        app:layout_constraintTop_toTopOf="@+id/postRecyclerView" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

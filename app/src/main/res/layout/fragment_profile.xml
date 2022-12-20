@@ -7,22 +7,32 @@
     android:background="@color/primary"
     tools:context=".ui.home.ProfileFragment">
 
+    <include
+        android:id="@+id/backToHomeFragment"
+        layout="@layout/toolbar"
+        app:layout_constraintBottom_toTopOf="@+id/profileScreenUserNameTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/profileScreenUserNameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginBottom="25dp"
         android:background="@drawable/edit_text_background"
         android:padding="15dp"
         android:text="@string/name"
-        android:textSize="20sp"
         android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/profileScreenEmailTextView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/backToHomeFragment" />
 
     <TextView
         android:id="@+id/profileScreenEmailTextView"

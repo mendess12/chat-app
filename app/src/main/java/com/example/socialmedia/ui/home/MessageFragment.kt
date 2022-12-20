@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.socialmedia.R
 import com.example.socialmedia.adapter.MessageRecyclerAdapter
@@ -48,6 +49,12 @@ class MessageFragment : Fragment() {
         messageRecyclerAdapter = MessageRecyclerAdapter(userList)
         binding.messageRecyclerView.adapter = messageRecyclerAdapter
 
+
+        binding.backToHomeFragment.back.setOnClickListener {
+
+            val action = MessageFragmentDirections.actionMessageFragmentToHomeFragment()
+            findNavController().navigate(action)
+        }
 
     }
 

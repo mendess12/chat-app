@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.example.socialmedia.R
 import com.example.socialmedia.databinding.FragmentChangePasswordBinding
 import com.google.firebase.auth.EmailAuthProvider
@@ -50,7 +51,7 @@ class ChangePasswordFragment : Fragment() {
 
                 if (newPassword == retypeNewPassword) {
                     val user: FirebaseUser = auth.currentUser!!
-                    if (user != null && user.email != null) {
+                    if (user.email != null) {
 
                         val credential = EmailAuthProvider
                             .getCredential(user.email!!, password)
@@ -97,6 +98,12 @@ class ChangePasswordFragment : Fragment() {
                 Toast.makeText(requireContext(), "Please enter all the fields.", Toast.LENGTH_LONG)
                     .show()
             }
+        }
+
+        binding.backToProfileFragment.back.setOnClickListener {
+
+            val action = ChangePasswordFragmentDirections.actionChangePasswordFragmentToProfileFragment()
+            findNavController().navigate(action)
         }
     }
 }

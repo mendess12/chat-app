@@ -44,11 +44,13 @@ class ProfileFragment : Fragment() {
         getUserData()
 
         binding.profileScreenSignOutTextView.setOnClickListener {
-            auth.signOut()
-            //baseCurrent.currentUser = null
-            println("${baseCurrent.currentUser}")
-            val intent = Intent(requireContext(), MainActivity::class.java)
-            startActivity(intent)
+
+            if (auth.currentUser != null) {
+                auth.signOut()
+                val action = ProfileFragmentDirections.actionProfileFragmentToLoginFragment()
+                findNavController().navigate(action)
+            }
+
         }
 
         binding.profileScreenChangePasswordTextView.setOnClickListener {
@@ -56,6 +58,12 @@ class ProfileFragment : Fragment() {
             val action = ProfileFragmentDirections.actionProfileFragmentToChangePasswordFragment()
             findNavController().navigate(action)
 
+        }
+
+        binding.backToHomeFragment.back.setOnClickListener {
+
+            val action = ProfileFragmentDirections.actionProfileFragmentToHomeFragment2()
+            findNavController().navigate(action)
         }
     }
 

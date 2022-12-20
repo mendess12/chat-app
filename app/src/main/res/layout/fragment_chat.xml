@@ -8,13 +8,22 @@
     android:orientation="vertical"
     tools:context=".ui.chat.ChatFragment">
 
+    <include
+        android:id="@+id/backToMessageFragment"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/linearLayout"
-        android:layout_alignParentTop="true" />
+        android:layout_below="@+id/backToMessageFragment"
+        android:layout_marginTop="0dp"
+        tools:listitem="@layout/sent"
+        android:layout_marginBottom="1dp" />
 
     <LinearLayout
         android:id="@+id/linearLayout"

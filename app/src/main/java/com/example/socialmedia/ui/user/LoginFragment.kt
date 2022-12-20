@@ -39,7 +39,7 @@ class LoginFragment : Fragment() {
 
         baseCurrent.currentUser = auth.currentUser
         if (baseCurrent.currentUser != null) {
-            val action = LoginFragmentDirections.actionLoginFragmentToMainActivity2()
+            val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
             findNavController().navigate(action)
         }
 
@@ -52,7 +52,7 @@ class LoginFragment : Fragment() {
 
                 auth.signInWithEmailAndPassword(email, password).addOnSuccessListener {
                     Toast.makeText(activity, "Sucess", Toast.LENGTH_LONG).show()
-                    val action = LoginFragmentDirections.actionLoginFragmentToMainActivity2()
+                    val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
                     findNavController().navigate(action)
                 }.addOnFailureListener {
                     Toast.makeText(activity, it.localizedMessage, Toast.LENGTH_LONG).show()

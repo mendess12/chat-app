@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.socialmedia.R
 import com.example.socialmedia.adapter.PostRecyclerAdapter
@@ -48,13 +49,32 @@ class HomeFragment : Fragment() {
         binding.postRecyclerView.layoutManager = LinearLayoutManager(activity)
         postRecyclerAdapter = PostRecyclerAdapter(postArrayList)
         binding.postRecyclerView.adapter = postRecyclerAdapter
+
+
+        binding.homeToolbar.profile.setOnClickListener {
+
+            val action = HomeFragmentDirections.actionHomeFragmentToProfileFragment()
+            findNavController().navigate(action)
+        }
+
+        binding.homeToolbar.message.setOnClickListener {
+
+            val action = HomeFragmentDirections.actionHomeFragmentToMessageFragment()
+            findNavController().navigate(action)
+        }
+
+        binding.addPostImageView.setOnClickListener {
+
+            val action = HomeFragmentDirections.actionHomeFragmentToAddPostFragment()
+            findNavController().navigate(action)
+        }
     }
 
     private fun getData() {
         firestore.collection("Posts").orderBy("date", Query.Direction.DESCENDING)
             .addSnapshotListener { value, error ->
                 if (error != null) {
-                    Toast.makeText(context, error.localizedMessage, Toast.LENGTH_LONG)
+                    Toast.makeText(requireContext(), error.localizedMessage, Toast.LENGTH_LONG)
                         .show()
                 } else {
                     if (value != null) {

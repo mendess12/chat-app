@@ -16,6 +16,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.example.socialmedia.R
 import com.example.socialmedia.databinding.FragmentAddPostBinding
 import com.google.android.material.snackbar.Snackbar
@@ -116,9 +117,9 @@ class AddPostFragment : Fragment() {
 
                             firestore.collection("Posts").add(postMap).addOnSuccessListener {
 
-                                //todo
-                                // val action = AddPostFragmentDirections.actionAddPostFragmentToHomeFragment()
-                                //findNavController().navigate(action)
+                                val action =
+                                    AddPostFragmentDirections.actionAddPostFragmentToHomeFragment()
+                                findNavController().navigate(action)
                             }.addOnFailureListener {
                                 Toast.makeText(
                                     requireContext(),
@@ -132,6 +133,12 @@ class AddPostFragment : Fragment() {
                     Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_LONG).show()
                 }
             }
+        }
+
+        binding.backToHomeFragment.back.setOnClickListener {
+
+            val action = AddPostFragmentDirections.actionAddPostFragmentToHomeFragment()
+            findNavController().navigate(action)
         }
     }
 
