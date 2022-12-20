@@ -36,74 +36,85 @@ class ChangePasswordFragment : Fragment() {
         binding = FragmentChangePasswordBinding.bind(view)
         auth = FirebaseAuth.getInstance()
 
-        var password: String
-        var newPassword: String
-        var retypeNewPassword: String
-
-        password = binding.passwordChangePasswordScreenEditText.text.toString().trim()
-        newPassword = binding.passwordChangeNewPasswordScreenEditText.text.toString().trim()
-        retypeNewPassword =
-            binding.passwordChangeRetypeNewPasswordScreenEditText.text.toString().trim()
-
         binding.changePasswordScreenSaveButton.setOnClickListener {
-
-            if (password.isNotEmpty() && newPassword.isNotEmpty() && retypeNewPassword.isNotEmpty()) {
-
-                if (newPassword == retypeNewPassword) {
-                    val user: FirebaseUser = auth.currentUser!!
-                    if (user.email != null) {
-
-                        val credential = EmailAuthProvider
-                            .getCredential(user.email!!, password)
-                        user.reauthenticate(credential)
-                            .addOnCompleteListener {
-                                if (it.isSuccessful) {
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "Re-Authentication success.",
-                                        Toast.LENGTH_LONG
-                                    ).show()
-
-                                    user!!.updatePassword(newPassword)
-                                        .addOnCompleteListener { task ->
-                                            if (task.isSuccessful) {
-                                                Toast.makeText(
-                                                    requireContext(),
-                                                    "Password changed successfully.",
-                                                    Toast.LENGTH_LONG
-                                                ).show()
-                                            } else {
-                                                Toast.makeText(
-                                                    requireContext(),
-                                                    "Password changed failed.",
-                                                    Toast.LENGTH_LONG
-                                                ).show()
-                                                auth.signOut()
-                                            }
-                                        }
-                                } else {
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "Re-Authentication failed.",
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                }
-                            }
-                    }
-                } else {
-                    Toast.makeText(requireContext(), "Password mismatching", Toast.LENGTH_LONG)
-                        .show()
-                }
-            } else {
-                Toast.makeText(requireContext(), "Please enter all the fields.", Toast.LENGTH_LONG)
-                    .show()
-            }
+            changePassword()
         }
 
         binding.backToProfileFragment.back.setOnClickListener {
 
-            val action = ChangePasswordFragmentDirections.actionChangePasswordFragmentToProfileFragment()
+            val action =
+                ChangePasswordFragmentDirections.actionChangePasswordFragmentToProfileFragment()
             findNavController().navigate(action)
+        }
+    }
+
+    fun changePassword() {
+
+
+        if (binding.passwordChangePasswordScreenEditText.text!!.isNotEmpty() &&
+            binding.passwordChangeNewPasswordScreenEditText.text!!.isNotEmpty() &&
+            binding.passwordChangeRetypeNewPasswordScreenEditText.text!!.isNotEmpty()
+        ) {
+
+            if (binding.passwordChangeNewPasswordScreenEditText.text.toString()
+                == binding.passwordChangeRetypeNewPasswordScreenEditText.text.toString()
+            ) {
+
+                val user = auth.currentUser
+                if (user != null && user.email != null) {
+
+                    val credential = EmailAuthProvider.getCredential(
+                        user.email!!,
+                        binding.passwordChangePasswordScreenEditText.text.toString()
+                    )
+
+                    user?.reauthenticate(credential)?.addOnCompleteListener {
+
+                        if (it.isSuccessful) {
+                            Toast.makeText(
+                                activity,
+                                "Re-Authentication success",
+                                Toast.LENGTH_LONG
+                            ).show()
+
+                            user?.updatePassword(binding.passwordChangeNewPasswordScreenEditText.text.toString())
+                                ?.addOnCompleteListener {
+
+                                    if (it.isSuccessful) {
+                                        Toast.makeText(
+                                            activity,
+                                            "Password changed successfully",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                        auth.signOut()
+                                        val action =
+                                            ChangePasswordFragmentDirections.actionChangePasswordFragmentToLoginFragment()
+                                        findNavController().navigate(action)
+                                    }
+                                }
+
+                        } else {
+                            Toast.makeText(
+                                activity,
+                                "Re-Authentication failed",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+
+                    }
+
+                } else {
+                    val action =
+                        ChangePasswordFragmentDirections.actionChangePasswordFragmentToLoginFragment()
+                    findNavController().navigate(action)
+                }
+
+            } else {
+                Toast.makeText(activity, "Password mismatching.", Toast.LENGTH_LONG).show()
+            }
+
+        } else {
+            Toast.makeText(activity, "Please enter all the fields.", Toast.LENGTH_LONG).show()
         }
     }
 }
