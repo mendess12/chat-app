@@ -14,7 +14,7 @@
         android:backgroundTint="@color/dark">
 
         <TextView
-            android:id="@+id/sentMessage"
+            android:id="@+id/sentMessageTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="This is sent message"

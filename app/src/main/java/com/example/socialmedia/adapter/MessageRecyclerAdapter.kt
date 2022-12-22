@@ -3,8 +3,10 @@ package com.example.socialmedia.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.socialmedia.databinding.ChatRecyclerRowBinding
+import com.example.socialmedia.ui.home.MessageFragmentDirections
 import com.example.socialmedia.util.User
 
 class MessageRecyclerAdapter( var userList: ArrayList<User>) :
@@ -20,7 +22,14 @@ class MessageRecyclerAdapter( var userList: ArrayList<User>) :
     }
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
+        val currentUser = userList[position]
+
        holder.binding.recyclerUserName.text = userList.get(position).name
+
+        holder.itemView.setOnClickListener {
+            val action = MessageFragmentDirections.actionMessageFragmentToChatFragment(currentUser.uid!!,currentUser.name!!)
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
     override fun getItemCount(): Int {
