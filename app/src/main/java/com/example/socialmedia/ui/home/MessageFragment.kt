@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.socialmedia.R
 import com.example.socialmedia.adapter.MessageRecyclerAdapter
 import com.example.socialmedia.databinding.FragmentMessageBinding
-import com.example.socialmedia.util.User
+import com.example.socialmedia.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 

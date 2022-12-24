@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primary"
@@ -28,5 +27,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/backToHomeFragment"
             tools:listitem="@layout/chat_recycler_row" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

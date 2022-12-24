@@ -6,9 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.socialmedia.R
-import com.example.socialmedia.databinding.ReceiveBinding
-import com.example.socialmedia.databinding.SentBinding
-import com.example.socialmedia.util.Message
+import com.example.socialmedia.model.Message
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.receive.view.*
 import kotlinx.android.synthetic.main.sent.view.*

@@ -117,6 +117,7 @@ class AddPostFragment : Fragment() {
 
                             firestore.collection("Posts").add(postMap).addOnSuccessListener {
 
+                                //todo apk da hata veriyor
                                 val action =
                                     AddPostFragmentDirections.actionAddPostFragmentToHomeFragment()
                                 findNavController().navigate(action)

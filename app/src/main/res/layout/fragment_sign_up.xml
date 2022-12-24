@@ -4,9 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primary"
@@ -45,9 +43,7 @@
                 android:inputType="text"
                 android:textColor="@color/edit_text_color"
                 android:textSize="24sp" />
-
         </com.google.android.material.textfield.TextInputLayout>
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/signUpEmail"
@@ -70,7 +66,6 @@
                 android:inputType="textEmailAddress"
                 android:textColor="@color/edit_text_color"
                 android:textSize="24sp" />
-
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -96,7 +91,6 @@
                 android:textSize="24sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <TextView
             android:id="@+id/signUpScreenForgotPasswordTextView"
             android:layout_width="wrap_content"
@@ -109,7 +103,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/signUpPassword" />
-
 
         <Button
             android:id="@+id/signUpScreenSignUpButton"
@@ -161,5 +154,4 @@
             app:layout_constraintTop_toBottomOf="@+id/signUpScreenSignUpButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

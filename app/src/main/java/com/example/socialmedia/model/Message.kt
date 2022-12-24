@@ -1,4 +1,4 @@
-package com.example.socialmedia.util
+package com.example.socialmedia.model
 
 class Message {
 

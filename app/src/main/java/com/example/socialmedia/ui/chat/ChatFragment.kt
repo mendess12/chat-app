@@ -13,12 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.socialmedia.R
 import com.example.socialmedia.adapter.ChatRecyclerAdapter
 import com.example.socialmedia.databinding.FragmentChatBinding
-import com.example.socialmedia.model.Post
-import com.example.socialmedia.util.Message
+import com.example.socialmedia.model.Message
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.fragment_chat.*
 
 class ChatFragment : Fragment() {
 

@@ -1,13 +1,12 @@
 package com.example.socialmedia.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.socialmedia.databinding.ChatRecyclerRowBinding
 import com.example.socialmedia.ui.home.MessageFragmentDirections
-import com.example.socialmedia.util.User
+import com.example.socialmedia.model.User
 
 class MessageRecyclerAdapter( var userList: ArrayList<User>) :
     RecyclerView.Adapter<MessageRecyclerAdapter.MessageViewHolder>() {
