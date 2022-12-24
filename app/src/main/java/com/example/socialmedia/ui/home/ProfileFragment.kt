@@ -20,7 +20,6 @@ class ProfileFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: FragmentProfileBinding
     private lateinit var firestore: FirebaseFirestore
-    var baseCurrent = BaseCurrent()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

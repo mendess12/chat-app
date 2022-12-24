@@ -51,6 +51,8 @@ class ChatFragment : Fragment() {
         senderRoom = args.uid + senderUid
         receiverRoom = senderUid + args.uid
 
+        binding.backToMessageFragment.toolbarTextView.setText("${args.userName}")
+
         database = FirebaseDatabase.getInstance().getReference()
 
         chatRecyclerView = binding.chatRecyclerView
